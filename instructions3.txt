@@ -1,0 +1,142 @@
+
+
+==================================================
+STEP 8 – Update index.html for Iframe Navigation
+==================================================
+-What it does:
+Adds the iframe that will display other pages and
+a navbar with buttons to switch between them.
+
+Code to copy (replace old <main> section in index.html):
+----------------------------------------
+<main class="main">
+  <section class="content portal">
+    <iframe id="viewer" src="dashboard.html" frameborder="0"></iframe>
+  </section>
+</main>
+----------------------------------------
+
+And update the header nav buttons to include page targets:
+----------------------------------------
+<nav class="nav">
+  <button class="nav-btn" data-page="dashboard.html">Dashboard</button>
+  <button class="nav-btn" data-page="library.html">Library</button>
+  <button class="nav-btn" data-page="player.html">Player</button>
+  <button class="nav-btn" data-page="profile.html">Profile</button>
+  <button class="nav-btn" data-page="about.html">About</button>
+</nav>
+----------------------------------------
+- Preview:
+Still looks the same visually — the iframe will show your first page
+(`dashboard.html`) inside the main area.
+
+
+
+
+
+
+
+==================================================
+STEP 9 – Style the Iframe Area with Flexbox
+==================================================
+-What it does:
+Centers the iframe, lets it expand to fill available space,
+and adds clean borders and shadows.
+
+Add this to flex.css:
+----------------------------------------
+.portal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+#viewer {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+----------------------------------------
+-Preview:
+The iframe is centered and fills the main area nicely.
+
+
+
+
+
+
+
+
+==================================================
+STEP 10 – Add JavaScript for Dynamic Navigation
+==================================================
+-What it does:
+When a nav button is clicked:
+• Updates iframe.src  
+• Highlights the active button  
+• Updates footer text with current page name
+
+Create file: script.js
+----------------------------------------
+document.addEventListener("DOMContentLoaded",()=>{
+  const viewer=document.getElementById("viewer");
+  const buttons=document.querySelectorAll(".nav-btn");
+  const footer=document.querySelector(".footer p");
+
+  buttons.forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const page=btn.getAttribute("data-page");
+      viewer.src=page;
+
+      buttons.forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+
+      footer.textContent=`Now viewing: ${btn.textContent}`;
+    });
+  });
+
+  // Theme toggle
+  const themeBtn=document.querySelector(".actions .btn");
+  themeBtn.addEventListener("click",()=>{
+    document.body.classList.toggle("light");
+  });
+});
+----------------------------------------
+- Preview:
+Open index.html → click buttons → iframe content switches pages.
+Footer updates live. Header stays fixed.
+
+
+
+
+
+==================================================
+STEP 11 – Style Active Button and Light Theme
+==================================================
+Highlights the active nav button and sets light-mode colors.
+
+Add to styles.css:
+----------------------------------------
+.nav-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+body.light {
+  --bg:#f8f8fb;
+  --panel:#ffffff;
+  --surface:#ffffff;
+  --text:#111;
+  --text-inv:#000;
+  background:var(--bg);
+  color:var(--text);
+}
+----------------------------------------
+
+- Preview:
+Click “Theme” 🌗 → toggles between dark and light themes.
+Active page button glows blue.
