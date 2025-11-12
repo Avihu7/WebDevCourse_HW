@@ -1,0 +1,130 @@
+==================================================  
+Part 2 – Dashboard Page : Card Layout + Flex-Wrap
+==================================================
+
+==================================================
+STEP 4 – Create dashboard.html 
+==================================================
+
+Code to copy:
+----------------------------------------
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="flex.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">⚑ Dashboard</div>
+  </header>
+
+  <main class="main">
+    <aside class="sidebar">
+      <h3>Sidebar</h3>
+      <p>This area stays fixed width (same as index).</p>
+    </aside>
+
+    <section class="content">
+      <h2>Statistics</h2>
+      <div class="card-grid">
+        <article class="panel card"><h3>Users</h3><p>1 ,204</p></article>
+        <article class="panel card"><h3>Streams</h3><p>4 ,712</p></article>
+        <article class="panel card"><h3>Revenue</h3><p>$12 ,540</p></article>
+        <article class="panel card"><h3>Feedback</h3><p>93%</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Dashboard page</p>
+  </footer>
+</body>
+</html>
+----------------------------------------
+Cards are stacked vertically — no Flex yet.
+
+
+
+==================================================
+STEP 5 – Add Flex to make cards wrap
+==================================================
+Turns `.card-grid` into a horizontal Flex container that wraps its children.
+Each card keeps a minimum width and auto-flows into new rows.
+
+Code to copy (add to flex.css):
+----------------------------------------
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;          /* allow cards to move onto new lines */
+  gap: var(--gap);          /* even spacing between cards */
+}
+
+.card {
+  flex: 1 1 240px;          /* grow and shrink, base width = 240px */
+  min-width: 220px;
+  padding: 16px;
+}
+----------------------------------------
+- Preview:
+Now the cards line up in a row on large screens and wrap gracefully on smaller screens.
+
+
+
+
+
+==================================================
+`flex-wrap` and `flex-basis`
+==================================================
+`flex-wrap: wrap` lets items flow onto new lines when space runs out.  
+`flex-basis` (the third number in `flex: 1 1 240px`) sets a *preferred* starting width.  
+Together they create responsive rows without media queries!
+
+Try live:
+1. Change `flex-basis` → `180px` → cards get narrower.  
+2. Resize browser → see them wrap automatically.
+
+
+
+
+
+
+==================================================
+STEP 6 – Make cards fill full height of each row (optional)
+==================================================
+ What it does:
+Aligns cards so all in a row share equal height.
+
+Code to copy (add below previous rule):
+----------------------------------------
+.card-grid {
+  align-items: stretch;     /* stretch cards to same height per row */
+}
+----------------------------------------
+
+Preview:
+All cards in the same row are equal height – neat and balanced.
+
+
+
+
+
+
+
+==================================================
+STEP 7 – Responsive tweak (extra)
+==================================================
+What it does:
+Adds breathing room when the sidebar stacks above content on small screens.
+
+Code to copy:
+----------------------------------------
+@media (max-width: 900px) {
+  .card-grid { justify-content: center; }
+}
+----------------------------------------
+
+
