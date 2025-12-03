@@ -1,0 +1,144 @@
+:root{
+  --accent:#2196F3;
+  --bg:#0f1116;
+  --panel:#141720;
+  --surface:#ffffff;
+  --text:#0e0f12;
+  --text-inv:#eef2ff;
+  --gap:16px;
+  --radius:12px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font:16px/1.5 system-ui,Segoe UI,Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+
+.header,.footer,.sidebar{
+  background:var(--panel);
+  color:var(--text-inv);
+  padding:12px var(--gap);
+  border-radius:var(--radius);
+  margin:var(--gap);
+}
+.content{
+  background:var(--surface);
+  color:var(--text);
+  padding:16px;
+  border-radius:var(--radius);
+  margin:var(--gap);
+}
+.btn{background:#e9eef8;border:1px solid #d3d9e6;color:#0e0f12;padding:8px 12px;border-radius:10px}
+.btn.ghost{background:transparent;border:1px solid #d3d9e6;color:var(--text-inv)}
+.nav-btn{background:transparent;border:1px solid #293044;color:var(--text-inv);padding:8px 12px;border-radius:10px;margin:0 4px}
+.nav-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:var(--gap);
+}
+
+.header .actions{
+  display:flex;
+  gap:8px;
+}
+
+.main{
+  display:flex;
+  gap:var(--gap);
+  margin:var(--gap);
+}
+
+.sidebar{
+  flex:0 0 240px;       /* fixed width */
+}
+
+
+.content{
+  flex:1;               /* take remaining space */
+}
+
+.footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+@media(max-width:900px){
+  .main{flex-direction:column}
+  .header{flex-wrap:wrap}
+}
+
+html, body {
+  height: 100%;           /* make the body fill the full viewport height */
+}
+
+body {
+  display: flex;           /* turn the whole body into a column flex container */
+  flex-direction: column;  /* stack header, main, footer vertically */
+}
+
+.main {
+  flex: 1;                 /* make main area expand to fill leftover space */
+}
+
+/* Portal iframe fills the content area */
+.portal {
+  padding: 0;               /* בלי ריפוד פנימי כדי שה־iframe ימלא */
+  overflow: hidden;
+}
+/*
+.portal #viewer {
+  display: block;
+  width: 100%;
+  height: calc(100vh - 180px); 
+  border: 0;
+  /
+}
+  */
+
+html, body { height: 100%; }
+body { display: flex; flex-direction: column; }
+.main { flex: 1; }
+
+/* כדי לראות צל ורדיוס של ה-iframe */
+.content.portal { flex: 1; padding: 0; background: transparent; overflow: hidden; }
+
+/* כפתור פעיל */
+.nav-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* מצב תאורה */
+body.light {
+  --bg:#f5f7fb;
+  --panel:#ffffff;
+  --surface:#ffffff;
+  --text:#0e0f12;
+  --text-inv:#0e0f12;
+}
+
+.nav-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+body.light {
+  --bg:#f8f8fb;
+  --panel:#ffffff;
+  --surface:#ffffff;
+  --text:#111;
+  --text-inv:#000;
+  background:var(--bg);
+  color:var(--text);
+}
