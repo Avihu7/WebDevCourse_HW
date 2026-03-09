@@ -34,7 +34,7 @@ app.get("/", requireAuth, (req, res) => {
 });
 
 // 404 fallback
-app.use((req, res) => {
+app.use((_req, res) => {
     res.status(404).send("Not Found");
 });
 

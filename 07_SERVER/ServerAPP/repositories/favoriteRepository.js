@@ -5,7 +5,7 @@ class FavoriteRepository {
     async findByUserId(userId) {
         return new Promise((resolve, reject) => {
             db.all(
-                `SELECT * FROM Favorites WHERE userId = ? ORDER BY addedAt DESC`,
+                `SELECT * FROM Favorites WHERE userId = ? ORDER BY createdAt DESC`,
                 [userId],
                 (err, rows) => {
                     if (err) return reject(err);
@@ -29,15 +29,15 @@ class FavoriteRepository {
     }
 
     async create({ userId, videoId, title, channelTitle, thumbnail }) {
-        const addedAt = new Date().toISOString();
+        const createdAt = new Date().toISOString();
         return new Promise((resolve, reject) => {
             db.run(
-                `INSERT INTO Favorites (userId, videoId, title, channelTitle, thumbnail, addedAt)
+                `INSERT INTO Favorites (userId, videoId, title, channelTitle, thumbnail, createdAt)
                  VALUES (?, ?, ?, ?, ?, ?)`,
-                [userId, videoId, title, channelTitle, thumbnail, addedAt],
+                [userId, videoId, title, channelTitle, thumbnail, createdAt],
                 function (err) {
                     if (err) return reject(err);
-                    resolve(new Favorite({ id: this.lastID, userId, videoId, title, channelTitle, thumbnail, addedAt }));
+                    resolve(new Favorite({ id: this.lastID, userId, videoId, title, channelTitle, thumbnail, createdAt }));
                 }
             );
         });

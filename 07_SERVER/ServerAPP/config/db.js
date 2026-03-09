@@ -23,7 +23,7 @@ db.serialize(() => {
             title TEXT NOT NULL,
             channelTitle TEXT NOT NULL,
             thumbnail TEXT NOT NULL,
-            addedAt TEXT NOT NULL,
+            createdAt TEXT NOT NULL,
             FOREIGN KEY (userId) REFERENCES Users(id) ON DELETE CASCADE
         )
     `);

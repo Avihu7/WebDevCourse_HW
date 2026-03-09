@@ -14,6 +14,9 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# SQLite databases (recreated automatically on startup)
+*.sqlite
+
 # Runtime data
 pids/
 *.pid
